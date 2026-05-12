@@ -1,0 +1,463 @@
+:root {
+    --primary: #ffcc00; 
+    --bg-dark: #050505;
+    --glass: rgba(255, 255, 255, 0.05);
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden; 
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: white;
+    font-family: 'Cairo', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+section {
+    position: relative;
+    box-shadow: inset 0 50px 50px -50px rgba(0,0,0,0.8), 
+                inset 0 -50px 50px -50px rgba(0,0,0,0.8);
+}
+
+
+.hero {
+    min-height: 100vh;
+    background :url('Hero_Background16_9.png') no-repeat center center fixed; 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* بيخلي الصورة ثابتة وأنت بتعمل سكرول (Parallax effect) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.hero-container {
+    z-index: 2;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.hero-text {
+    max-width: 800px; /* عشان الكلام ميبقاش عريض بزيادة */
+    margin: 0 auto;
+}
+
+.hero-text h1 {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    margin-bottom: 20px;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.5); /* ضل عشان الكلام يظهر فوق الصورة */
+}
+
+/* تظبيط الموبايل عشان الصورة متتمطش */
+@media (max-width: 768px) {
+    .hero {
+        background: url('Hero_Background9_16.png') no-repeat center ;
+        background-size: cover;
+        background-attachment: scroll; /* الموبايلات مابتفضلش الـ fixed */
+        background-position: 70% center; /* بيحرك الصورة شوية عشان وشك يظهر لو الصورة عرضية */
+    }
+}
+.stats {
+    display: flex;
+    justify-content: center; /* سنترة أفقية */
+    align-items: center;     /* سنترة عمودية */
+    flex-wrap: wrap;         /* عشان ينزلوا تحت بعض لو الشاشة صغرت */
+    gap: 30px;               /* المسافة بين الكروت */
+    padding: 100px 20px;
+    background: linear-gradient(to bottom, #050505 0%, #0b0b0b 50%, #050505 100%);
+    width: 100%;             
+    box-sizing: border-box;
+    border-top: 1px solid rgba(255, 204, 0, 0.05);
+}
+
+.stat-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;                 /* بيخليهم يوزعوا المساحة بالتساوي */
+    min-width: 250px;        /* أقل عرض للكارت قبل ما ينزل تحت */
+    max-width: 350px;
+    cursor: pointer;         /* أقصى عرض للكارت */
+}
+
+.stat-circle {
+    width: 100%;             /* يملأ الـ stat-item */
+    display: flex;
+    flex-direction: column;
+    align-items: center;     /* سنترة المحتوى جوه الكارت نفسه */
+    justify-content: center;
+    padding: 30px;
+    background: linear-gradient(145deg, #111, #050505);
+    border: 1px solid rgba(255, 204, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+    .stats {
+        flex-direction: column; 
+        align-items: center;    
+        gap: 20px;
+    }
+
+    .stat-item {
+        width: 100%;
+        max-width: 90%;         
+    }
+}
+
+/* السكشن نفسه */
+.services {
+    padding: 100px 5%;
+    text-align: center;
+    background: #050505;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+}
+
+
+.glass-grid {
+    display: flex;
+    justify-content: center; 
+    align-items: stretch;    
+    flex-wrap: wrap;         
+    gap: 30px;      
+    margin: 0 auto;      
+    cursor: pointer;    
+}
+
+/* الكارت الزجاجي */
+.glass-card {
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px 30px;
+    border-radius: 25px;
+    flex: 1;                 /* توزيع متساوي */
+    /* min-width: 100px;        /* أقل عرض للكارت */
+    /* max-width: 400px;        /* أقصى عرض للكارت */
+    transition: 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;     /* سنترة المحتوى جوه الكارت */
+}
+
+.glass-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(255, 204, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .services {
+        align-items: center;
+    }
+
+    .glass-grid {
+        /* flex-direction: column; /* جعل الكروت تحت بعضها */
+        align-items: center;
+        text-align: center; 
+    }
+
+    .glass-card {
+        text-align: center;
+        align-items: center; /* سنترة المحتوى */
+        margin: 10px;
+    }
+
+    .glass-card h3 {
+        font-size: 1rem; /* تصغير العنوان قليلاً ليتناسب مع الموبايل */
+    }
+
+    .glass-card p {
+        font-size: 0.95rem; /* تحسين قراءة النص */
+        line-height: 3rem;
+    }
+}
+
+/* --- Contact Section --- */
+.contact-container {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.contact-form {
+    flex: 1;
+    min-width: 300px;
+    background: #111;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+/* --- Responsive (الموبايل) --- */
+@media (max-width: 768px) {
+    .hero {
+        padding-top: 80px;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .hero-container {
+        flex-direction: column-reverse; /* الصورة فوق والكلام تحت */
+        text-align: center;
+    }
+
+    .hero-text {
+        text-align: center;
+    }
+
+    .main-person {
+        max-width: 280px; /* حجم مناسب للموبايل */
+    }
+
+    .stats, .glass-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* بقية الأكواد اللي ملهاش علاقة بالبوزان سيبها زي ما هي */
+.btn-main {
+    padding: 15px 40px;
+    background: var(--primary);
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    display: inline-block;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding: 80px 0;
+    background: radial-gradient(to bottom, #1a1a1a 100%, #050505 0%);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-circle {
+    position: relative;
+    padding: 30px;
+    border: 2px solid rgba(255, 204, 0, 0.2);
+    border-radius: 20px;
+    background: linear-gradient(145deg, #111, #050505);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: 0.4s;
+    width: 150px;
+}
+
+.stat-circle:hover {
+    border-color: #ffcc00;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
+}
+
+.stat-circle i {
+    font-size: 30px;
+    color: #ffcc00;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.num {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.stat-circle p {
+    font-size: 1rem;
+    color: #888;
+    margin-top: 10px;
+}
+
+.services {
+    padding: 100px 20px;
+    text-align: center;
+    align-items: center;
+}
+
+.glow-effect {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: var(--primary);
+    filter: blur(150px);
+    opacity: 0.2;
+    top: 20%;
+    z-index: -1;
+}
+
+
+.icon-box i {
+    font-size: 50px;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.btn-main {
+    padding: 15px 40px;
+    background: var(--primary);
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    box-shadow: 0 10px 20px rgba(255, 204, 0, 0.3);
+    transition: 0.3s;
+}
+.btn-main:hover {
+    border-color: var(--primary);
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(255, 204, 0, 0.1);
+}
+
+.contact-section {
+    padding: 100px 5%;
+    background: #050505;
+}
+
+.contact-container {
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* تصميم الفورم */
+.contact-form {
+    flex: 1;
+    min-width: 300px;
+    background: #111;
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 204, 0, 0.1);
+}
+
+.contact-form input, .contact-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: white;
+    border-radius: 8px;
+    outline: none;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: #ffcc00;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background: #e6b800;
+    transform: translateY(-3px);
+}
+
+/* كروت التواصل */
+.contact-info {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    transition: 0.3s;
+    border: 1px solid transparent;
+}
+
+.info-card:hover {
+    background: rgba(255, 204, 0, 0.05);
+    border-color: #ffcc00;
+}
+
+.info-card i {
+    font-size: 35px;
+    color: #ffcc00;
+    margin-bottom: 15px;
+}
+
+.info-card a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.info-card a:hover {
+    color: #ffcc00;
+}
+
+.main-footer {
+    padding: 30px 20px;
+    background: #000; /* أسود صريح عشان يفصل عن السكاشن اللي قبله */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: #888; /* لون رمادي هادي عشان ميزاحمش المحتوى الأساسي */
+    font-size: 0.9rem;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.designer-credit a {
+    color: var(--primary); /* اللون الذهبي/الأصفر بتاعك */
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.designer-credit a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* تظبيط بسيط للشاشات الكبيرة */
+@media (min-width: 768px) {
+    .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
